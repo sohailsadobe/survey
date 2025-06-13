@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Adobe Feedback Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background-color: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 500px;
+      max-width: 90%;
+    }
+    h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .rating-group {
+      display: flex;
+      justify-content: space-between;
+      margin: 15px 0;
+    }
+    .rating-group label {
+      font-size: 14px;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 14px;
+      resize: vertical;
+    }
+    .checkbox-group {
+      margin-top: 15px;
+    }
+    .form-actions {
+      margin-top: 20px;
+      text-align: right;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .cancel-btn {
+      background-color: #e0e0e0;
+      margin-right: 10px;
+    }
+    .submit-btn {
+      background-color: black;
+      color: white;
+    }
+    .thank-you-message {
+      display: none;
+      text-align: center;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container" id="form-container">
+    <h2>Help us improve your Adobe experience</h2>
+    <form id="feedback-form">
+      <label>How likely are you to recommend Adobe to a friend or colleague? *</label>
+      <div class="rating-group">
+        <label><input type="radio" name="rating" value="0"> 0</label>
+        <label><input type="radio" name="rating" value="1"> 1</label>
+        <label><input type="radio" name="rating" value="2"> 2</label>
+        <label><input type="radio" name="rating" value="3"> 3</label>
+        <label><input type="radio" name="rating" value="4"> 4</label>
+        <label><input type="radio" name="rating" value="5"> 5</label>
+        <label><input type="radio" name="rating" value="6"> 6</label>
+        <label><input type="radio" name="rating" value="7"> 7</label>
+        <label><input type="radio" name="rating" value="8"> 8</label>
+        <label><input type="radio" name="rating" value="9"> 9</label>
+        <label><input type="radio" name="rating" value="10"> 10</label>
+      </div>
+
+      <label for="feedback">Kindly explain your rating</label>
+      <textarea id="feedback" name="feedback" placeholder="Type your feedback here..."></textarea>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="contact" name="contact">
+        <label for="contact">Adobe can contact me about my feedback</label>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="cancel-btn">Cancel</button>
+        <button type="submit" class="submit-btn">Submit</button>
+      </div>
+    </form>
+  </div>
+  <div class="thank-you-message" id="thank-you-message">
+    Thank you for your valuable feedback!
+  </div>
+
+  <script>
+    document.getElementById('feedback-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+    //   // Gather form data
+    //   const formData = new FormData(event.target);
+    //   const data = Object.fromEntries(formData.entries());
+
+    //   // Send POST request
+    //   fetch('https://example.com/formData', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(data)
+    //   })
+    //   .then(response => {
+    //     if (response.ok) {
+          // Hide form and show thank-you message
+          document.getElementById('form-container').style.display = 'none';
+          document.getElementById('thank-you-message').style.display = 'block';
+    //     } else {
+    //       alert('Failed to submit feedback. Please try again.');
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.error('Error:', error);
+    //     alert('An error occurred. Please try again.');
+    //   });
+    
+    });
+  </script>
+</body>
+</html>
