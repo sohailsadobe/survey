@@ -108,36 +108,119 @@
   </div>
 
   <script>
+    let profileData = '';
+     window.addEventListener('message', async function(event) {
+      profileData = event.data; // Get the data sent by the parent
+      console.log('Received profile data:', profileData);
+      // document.getElementById('profile-data').textContent = `Profile: ${profileData}`;
+    });
+
     document.getElementById('feedback-form').addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent form submission
+        // Build payload
+    const payload = {
+      event: {
+        xdm: {
+          eventType: "decisioning.propositionFetch",
+          identityMap: {
+            adobeGUID: [
+              {
+                id: profileData,
+                authenticatedState: "authenticated",
+                primary: true
+              }
+            ]
+          },
+          _adobe_corpnew: {
+               app: {
+    installedApplications: [
+      {
+        id: "PHXS",
+        language: "sentnow",
+        name:  profileData,
+        version: "26.4.0"
+      }
+    ]
+  }
+          },
+          timestamp: new Date().toISOString(),
+          homeAddress: {
+            countryCode: "US"
+          },
+          productArrangementCode: "phsp_direct_individual"
+        }
+      },
+      query: {
+        personalization: {
+          schemas: [
+            "https://ns.adobe.com/personalization/default-content-item",
+            "https://ns.adobe.com/personalization/html-content-item",
+            "https://ns.adobe.com/personalization/json-content-item",
+            "https://ns.adobe.com/personalization/redirect-item",
+            "https://ns.adobe.com/personalization/dom-action"
+          ],
+          surfaces: [
+            "web://sohails.test.com"
+          ]
+        }
+      }
+    };
 
-    //   // Gather form data
-    //   const formData = new FormData(event.target);
-    //   const data = Object.fromEntries(formData.entries());
 
-    //   // Send POST request
-    //   fetch('https://example.com/formData', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(data)
-    //   })
-    //   .then(response => {
-    //     if (response.ok) {
-          // Hide form and show thank-you message
-          document.getElementById('form-container').style.display = 'none';
-          document.getElementById('thank-you-message').style.display = 'block';
-    //     } else {
-    //       alert('Failed to submit feedback. Please try again.');
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.error('Error:', error);
-    //     alert('An error occurred. Please try again.');
-    //   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //   // Hide form and show thank-you message
+    //   document.getElementById('form-container').style.display = 'none';
+    //   const thankYouMessage = document.getElementById('thank-you-message');
+    //   thankYouMessage.textContent = `Thank you for your valuable feedback, ${profileData}!`;
+    //   thankYouMessage.style.display = 'block';
     
-    });
+    // });
+
+fetch("https://edge.adobedc.net/ee/v2/interact?datastreamId=cbb9ad82-3cea-4dae-91af-51ef2839dfe4", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log("Success:", data);
+    // Show thank-you message only after successful POST
+    document.getElementById('form-container').style.display = 'none';
+    const thankYouMessage = document.getElementById('thank-you-message');
+    thankYouMessage.textContent = `Thank you for your valuable feedback!`;
+    thankYouMessage.style.display = 'block';
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    alert("There was a problem submitting your feedback. Please try again later.");
+  });
+});
+
+    
   </script>
 </body>
 </html>
