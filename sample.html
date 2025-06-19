@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Button API Call</title>
+</head>
+<body>
+  <button id="apiBtn">Send API POST</button>
+  <div>
+    <label>Name:</label>
+    <span>sohail</span>
+  </div>
+  <script>
+    document.getElementById('apiBtn').onclick = function() {
+      fetch('https://a.com/get', {
+        method: 'POST'
+      });
+    };
+  </script>
+</body>
+</html>
