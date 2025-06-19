@@ -1,24 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE html>Add commentMore actions
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trigger Button</title>
-
-  <!-- Content Security Policy (CSP) -->
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    style-src 'self' 'nonce-abc123';
-    script-src 'self' 'nonce-abc123';
-    frame-src https://nps-csat.netlify.app;
-    object-src 'none';
-    base-uri 'self';
-    connect-src 'self';
-    img-src 'self';
-    font-src 'self';
-    " />
-
-  <style nonce="abc123">
+  <style>
     body {
       margin: 0;
       padding: 0;
@@ -61,31 +47,29 @@
   </style>
 </head>
 <body>
-  <button class="trigger-button" id="triggerBtn">Trigger</button>
-
+  <button class="trigger-button" onclick="openIframe()">Trigger</button>
   <div class="iframe-container" id="iframe-container">
-    <iframe
-      src="./index.html"
-      id="iframe"
-      sandbox="allow-scripts allow-same-origin"
-    ></iframe>
+    <iframe src="https://nps-csat.netlify.app/" id="iframe"></iframe>
   </div>
 
-  <script nonce="abc123">
+  <script>
+    // Assign the value 'sohails' to window.adobeIMS.getProfile()
     window.adobeIMS = {
-      getProfile: function () {
+      getProfile: function() {
         return '45F91E00684B25780A494020@AdobeID';
       }
     };
 
-    document.getElementById('triggerBtn').addEventListener('click', function () {
+    function openIframe() {
       document.getElementById('iframe-container').style.display = 'block';
+
+      // Send the value of window.adobeIMS.getProfile() to the iframe
       const iframe = document.getElementById('iframe');
       iframe.contentWindow.postMessage(window.adobeIMS.getProfile(), '*');
-    });
+    }
+
+    // Example usage
+    console.log(window.adobeIMS.getProfile()); // Outputs: 'sohails'
   </script>
 </body>
 </html>
-
-
-
