@@ -1,4 +1,4 @@
-<!DOCTYPE html>More actions
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -82,11 +82,7 @@
         <label><input type="radio" name="rating" value="3"> 3</label>
         <label><input type="radio" name="rating" value="4"> 4</label>
         <label><input type="radio" name="rating" value="5"> 5</label>
-        <label><input type="radio" name="rating" value="6"> 6</label>
-        <label><input type="radio" name="rating" value="7"> 7</label>
-        <label><input type="radio" name="rating" value="8"> 8</label>
-        <label><input type="radio" name="rating" value="9"> 9</label>
-        <label><input type="radio" name="rating" value="10"> 10</label>
+
       </div>
 
       <label for="feedback">Kindly explain your rating</label>
@@ -109,7 +105,9 @@
 
   <script>
     let profileData = '';
+    
      window.addEventListener('message', async function(event) {
+      alert('Hello from the iframe!');
       profileData = event.data; // Get the data sent by the parent
       console.log('Received profile data:', profileData);
       // document.getElementById('profile-data').textContent = `Profile: ${profileData}`;
@@ -185,11 +183,11 @@
 
 
 
-    //   // Hide form and show thank-you message
-    //   document.getElementById('form-container').style.display = 'none';
-    //   const thankYouMessage = document.getElementById('thank-you-message');
-    //   thankYouMessage.textContent = `Thank you for your valuable feedback, ${profileData}!`;
-    //   thankYouMessage.style.display = 'block';
+      // Hide form and show thank-you message
+      document.getElementById('form-container').style.display = 'none';
+      const thankYouMessage = document.getElementById('thank-you-message');
+      thankYouMessage.textContent = `Thank you for your valuable feedback, ${profileData}!`;
+      thankYouMessage.style.display = 'block';
     
     // });
 
@@ -219,6 +217,8 @@ fetch("https://edge.adobedc.net/ee/v2/interact?datastreamId=cbb9ad82-3cea-4dae-9
     alert("There was a problem submitting your feedback. Please try again later.");
   });
 });
- </script>Add commentMore actions
+
+    
+  </script>
 </body>
 </html>
