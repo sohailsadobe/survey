@@ -116,6 +116,15 @@
       // document.getElementById('profile-data').textContent = `Profile: ${profileData}`;
     });
 
+    
+  const params = new URLSearchParams(window.location.search);
+
+  // Retrieve the value for 'guid'
+  const guid = params.get('guid');
+  console.log('guid:', guid); // Output: 1234@adobe.com
+
+
+
     document.getElementById('feedback-form').addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent form submission
         // Build payload
