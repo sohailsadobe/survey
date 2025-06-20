@@ -109,19 +109,20 @@
 
   <script>
     let profileData = '';
-    
+    const params = new URLSearchParams(window.location.search);
+const guid = params.get('guid');
      window.addEventListener('message', async function(event) {
       profileData = event.data; // Get the data sent by the parent
       console.log('Received profile data:', profileData);
+      console.log('Received guid from url:', guid);
       // document.getElementById('profile-data').textContent = `Profile: ${profileData}`;
     });
 
-    
-  const params = new URLSearchParams(window.location.search);
 
+  
   // Retrieve the value for 'guid'
-  const guid = params.get('guid');
-  console.log('guid:', guid); // Output: 1234@adobe.com
+  
+  // console.log('guid:', guid); // Output: 1234@adobe.com
 
 
 
