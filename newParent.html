@@ -49,8 +49,9 @@
 <body>
   <button class="trigger-button" onclick="openIframe()">Trigger</button>
   <div class="iframe-container" id="iframe-container">
+    <iframe id="iframe"></iframe>
     <!-- <iframe src="https://nps-csat.netlify.app/" id="iframe"></iframe> -->
-<iframe src="https://csat-sol2.netlify.app/?guid=1234@adobe.com&version=adobedotcom-web-chrome" id="iframe"></iframe>
+<!-- <iframe src="https://csat-sol2.netlify.app/?guid=1234@adobe.com&version=adobedotcom-web-chrome" id="iframe"></iframe> -->
   </div>
 
   <script>
@@ -62,15 +63,13 @@
     };
 
     function openIframe() {
-      document.getElementById('iframe-container').style.display = 'block';
-
-      // Send the value of window.adobeIMS.getProfile() to the iframe
-      const iframe = document.getElementById('iframe');
-    //   iframe.contentWindow.postMessage(window.adobeIMS.getProfile(), '*');
+        document.getElementById('iframe-container').style.display = 'block';
+        const iframe = document.getElementById('iframe');
+        const guid = window.adobeIMS.getProfile();
+        const version = 'adobedotcom-web-chrome';
+        iframe.src = `https://csat-sol2.netlify.app/?guid=${encodeURIComponent(guid)}&version=${encodeURIComponent(version)}`;
     }
 
-    // Example usage
-    // console.log(window.adobeIMS.getProfile()); // Outputs: 'sohails'
   </script>
 </body>
 </html>
