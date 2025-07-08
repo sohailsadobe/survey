@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parent Page with Embedded Feedback Modal</title>
+</head>
+<body>
+  <button id="open-feedback">Open Adobe Feedback</button>
+
+  <script>
+    async function loadAndShowModal() {
+      if(document.getElementById('modal-backdrop')) return;
+
+      const backdrop = document.createElement('div');
+      backdrop.id = 'modal-backdrop';
+      document.body.appendChild(backdrop);
+
+      try {
+        // Adjust URLs below to point to your local child server
+        const childBaseUrl = 'http://localhost:8000'; 
+
+        // Fetch and inject CSS
+        // const cssResponse = await fetch(childBaseUrl + '/index.css', { mode: 'cors' });
+        // const cssText = await cssResponse.text();
+        // const styleTag = document.createElement('style');
+        // styleTag.textContent = cssText;
+        // document.head.appendChild(styleTag);
+
+        // Fetch modal HTML
+        const htmlResponse = await fetch(childBaseUrl + '/index.html');
+        const htmlText = await htmlResponse.text();
+        backdrop.innerHTML = htmlText;
+
+        // Fetch modal JS
+        const jsResponse = await fetch(childBaseUrl + '/index.js');
+        const jsText = await jsResponse.text();
+        const scriptTag = document.createElement('script');
+        scriptTag.textContent = jsText;
+        document.body.appendChild(scriptTag);
+
+        // Initialize modal with your data
+        window.initFeedbackModal({
+          guid: '45F91E00684B25780A494020@AdobeID',
+          version: 'adobedotcom-web-chrome'
+        });
+
+      } catch (error) {
+        console.error('Failed to load feedback modal:', error);
+        backdrop.remove();
+        alert('Failed to load feedback form. Please try again later.');
+      }
+    }
+
+    document.getElementById('open-feedback').addEventListener('click', loadAndShowModal);
+  </script>
+</body>
+</html>
