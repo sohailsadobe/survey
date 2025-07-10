@@ -8,9 +8,11 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f2f2f2;
   margin: 0;
-  padding: 40px 0; /* Add some top/bottom padding if you want */
+  padding: 0; /* Remove top/bottom padding */
   display: flex;
   justify-content: center;
+  height: 100%; /* Ensure the body takes up the full height */
+  overflow: hidden; /* Optional: Remove any scrollbars */
 }
 
 .form-container {
@@ -20,7 +22,27 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 500px;
   max-width: 90%;
+  margin-top: 20px; /* Add top margin to avoid sticking to the top */
+  margin-bottom: 0; /* Ensure there's no bottom margin */
+  flex-grow: 1; /* Ensure it grows to take up available space */
 }
+
+textarea {
+  width: 100%;
+  height: 80px;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 14px;
+  resize: vertical;
+  box-sizing: border-box; /* Ensure padding doesn't increase textarea size */
+}
+
+.form-actions {
+  margin-top: 20px;
+  text-align: right;
+  margin-bottom: 0; /* Ensure no extra space at the bottom */
+}
+
 
     h2 {
       font-size: 18px;
@@ -34,21 +56,21 @@ body {
     .rating-group label {
       font-size: 14px;
     }
-    textarea {
+    /* textarea {
       width: 100%;
       height: 80px;
       margin-top: 10px;
       padding: 10px;
       font-size: 14px;
       resize: vertical;
-    }
+    } */
     .checkbox-group {
       margin-top: 15px;
     }
-    .form-actions {
+    /* .form-actions {
       margin-top: 20px;
       text-align: right;
-    }
+    } */
     button {
       padding: 8px 16px;
       font-size: 14px;
