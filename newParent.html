@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Trigger Button</title>
   <style>
     body {
@@ -15,6 +15,7 @@
       background-color: #f5f5f5;
       font-family: Arial, sans-serif;
     }
+
     .trigger-button {
       padding: 10px 20px;
       font-size: 16px;
@@ -24,9 +25,11 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
     .trigger-button:hover {
       background-color: #0d66d0;
     }
+
     .iframe-container {
       display: none;
       position: fixed;
@@ -38,36 +41,83 @@
       border: 2px solid #ccc;
       background-color: white;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
     }
+
     iframe {
       width: 100%;
       height: 100%;
       border: none;
     }
+
+    /* Dim background */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+    }
+
+    /* Close button */
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1002;
+    }
+
+    .close-button:hover {
+      color: #ff0000;
+    }
   </style>
 </head>
 <body>
+
   <button class="trigger-button" onclick="openIframe()">Trigger</button>
+
+  <!-- Overlay and iframe modal -->
+  <div class="overlay" id="overlay" onclick="closeIframe()"></div>
+
   <div class="iframe-container" id="iframe-container">
+    <button class="close-button" onclick="closeIframe()">×</button>
     <iframe id="iframe"></iframe>
   </div>
 
   <script>
     // Assign the value 'sohails' to window.adobeIMS.getProfile()
     window.adobeIMS = {
-      getProfile: function() {
+      getProfile: function () {
         return '45F91E00684B25780A494020@AdobeID';
       }
     };
 
     function openIframe() {
-        document.getElementById('iframe-container').style.display = 'block';
-        const iframe = document.getElementById('iframe');
-        const guid = window.adobeIMS.getProfile();
-        const version = 'adobedotcom-web-chrome';
-        iframe.src = `https://csat-sol2.netlify.app/?guid=${encodeURIComponent(guid)}&version=${encodeURIComponent(version)}`;
+      const iframeContainer = document.getElementById('iframe-container');
+      const overlay = document.getElementById('overlay');
+      const iframe = document.getElementById('iframe');
+      const guid = window.adobeIMS.getProfile();
+      const version = 'adobedotcom-web-chrome';
+
+      iframe.src = `https://csatnps-sol3.netlify.app/?guid=${encodeURIComponent(guid)}&version=${encodeURIComponent(version)}`;
+      iframeContainer.style.display = 'block';
+      overlay.style.display = 'block';
     }
 
+    function closeIframe() {
+      document.getElementById('iframe-container').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('iframe').src = ''; // clear iframe content
+    }
   </script>
 </body>
 </html>
